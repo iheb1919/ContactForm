@@ -201,9 +201,12 @@ input[type="checkbox"] {
   fieldset div {
     flex-direction: row;
   }
-  .container,
-  form {
+  .container
+   {
     width: 80%;
+  }
+  form {
+    width: 100%;
   }
 }
 @media (max-width: 599px) {
