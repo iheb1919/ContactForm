@@ -26,15 +26,17 @@
   --MediumGrey: hsl(186, 15%, 59%);
   --DarkGrey: hsl(187, 24%, 22%);
   /* FontSize */
-  --labelFontSize: 16px;
+  --labelFontSize: 12px;
   /* Font */
   --karla: "karlaItalic", sans-serif; 
   --karlaRegular: "karlaRegular", sans-serif; 
   --karlaBold: "karlaBold", sans-serif; 
+  /*height*/
+  --inputHeight:2rem;
 }
 body {
-  height: 100vh;
-  width: 100%;
+  height: 100dvh;
+  width: 100dvw;
   font-family: var(--karlaRegular);
   background-color: var(--White);
   
@@ -60,14 +62,14 @@ form {
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .5rem;
   justify-content: center;
   align-items: center;
 }
 h2 {
   align-self: flex-start;
   font-family: var(--karlaBold);
-  
+  color: var(--DarkGrey);
   margin-bottom: 0.5rem;
 }
 .forminput {
@@ -89,14 +91,19 @@ label {
 span{
     font-size: var(--labelFontSize);
 }
+.oblig{
+  color: var(--Red);
+}
 label.test {
   border: 1px solid var(--black);
-  height: 40px;
+  height: var(--inputHeight);
+  max-height: 40px;
   border-radius: 5px;
   padding: 0 20px;
   display: flex;
   align-items: center;
   flex-direction: row;
+  border-color: var(--DarkGrey);
 }
 label.error input,
 label.error textarea {
@@ -114,11 +121,14 @@ fieldset.error::after {
 input[type="text"],
 input[type="submit"] {
   padding: 0 15px;
-  height: 40px;
+  height: var(--inputHeight);
+  max-height: 40px;
+
   border-radius: 5px;
   outline: 0;
   border: 1px solid;
   cursor: pointer;
+  border-color: var(--DarkGrey);
 }
 input[type="submit"] {
   background-color: var(--Green);
@@ -139,6 +149,8 @@ fieldset {
   gap: 10px;
   padding-top: 10px;
 }
+legend{  font-size: var(--labelFontSize);
+}
 fieldset div {
   display: flex;
   flex-direction: column;
@@ -150,6 +162,7 @@ textarea {
   height: 80px;
   border-radius: 5px;
   padding: 10px 15px;
+  border-color: var(--DarkGrey);
 }
 input[type="text"]:hover,
 textarea:hover,
@@ -164,6 +177,13 @@ input[type="radio"],
 input[type="checkbox"] {
   accent-color: var(--Green);
 }
+label span{
+  display: flex;
+}
+.check{
+  font-size: 12px;
+  gap: 10px;
+}
 /* Success Div */
 .success.hidden{
     display: none;
@@ -171,7 +191,7 @@ input[type="checkbox"] {
 .success{
     position: fixed;
     background-color: var(--DarkGrey);
-    height: fit-content;
+    height: 5rem;
     width: fit-content;
     top: 20px;
     border-radius: 10px;
@@ -189,11 +209,18 @@ input[type="checkbox"] {
     align-items: center;
     justify-content: center;
     width: fit-content;
-    font-family: var(--karlaBold);
+  
 }
-.success span {
-    font-size: 13px;
+.successTitle span{
+  color: var(--White);
+  font-size: 16px;
+  font-family: var(--karlaBold);
+}
+
+.success > span {
+    font-size: var(--labelFontSize);
     font-family: var(--karlaRegular);
+    color: var(--MediumGrey);
 
 }
 @media (min-width: 600px) {
@@ -202,25 +229,28 @@ input[type="checkbox"] {
     flex-direction: row;
   }
   .container
-   {
-    width: 80%;
-  }
-  form {
-    width: 100%;
-  }
+  {
+   width: 100%;
+ }
+ form {
+   width: 100%;
+ }
+  
 }
 @media (max-width: 599px) {
   input[type="text"],
   input[type="submit"],
-  label.test {
-    height: 35px;
-  }
+
   textarea {
     height: 80px;
   }
   .container,
   form {
     width: 100%;
+    height: fit-content;
+  }
+  .container{
+    height: 100%;
   }
 }
 @keyframes showUp {
