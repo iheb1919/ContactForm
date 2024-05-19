@@ -1,0 +1,231 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: karlaItalic;
+  src: url('./assets/fonts/Karla-Italic-VariableFont_wght.ttf')  format('truetype');
+}
+@font-face {
+  font-family: karlaBold;
+  src: url('./assets/fonts/static/Karla-Bold.ttf')  format('truetype');
+}
+@font-face {
+  font-family: karlaRegular;
+  src: url('./assets/fonts/static/Karla-Regular.ttf')  format('truetype');
+}
+:root {
+  /* Primary */
+  --LightGreen: hsl(148, 38%, 91%);
+  --Green: hsl(169, 82%, 27%);
+  --Red: hsl(0, 66%, 56%);
+  /*  Neutral */
+  --White: hsl(0, 0%, 100%);
+  --black: hsl(0, 0%, 0%);
+  --MediumGrey: hsl(186, 15%, 59%);
+  --DarkGrey: hsl(187, 24%, 22%);
+  /* FontSize */
+  --labelFontSize: 16px;
+  /* Font */
+  --karla: "karlaItalic", sans-serif; 
+  --karlaRegular: "karlaRegular", sans-serif; 
+  --karlaBold: "karlaBold", sans-serif; 
+}
+body {
+  height: 100vh;
+  width: 100%;
+  font-family: var(--karlaRegular);
+  background-color: var(--White);
+  
+}
+.container {
+  background-color: var(--LightGreen);
+  margin: auto;
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+form {
+  max-width: 500px;
+  border-radius: 10px;
+  background-color: var(--White);
+  height: fit-content;
+  width: 50%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+h2 {
+  align-self: flex-start;
+  font-family: var(--karlaBold);
+  
+  margin-bottom: 0.5rem;
+}
+.forminput {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+  position: relative;
+  font-size: var(--labelFontSize);
+  cursor: pointer;
+  
+}
+span{
+    font-size: var(--labelFontSize);
+}
+label.test {
+  border: 1px solid var(--black);
+  height: 40px;
+  border-radius: 5px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+label.error input,
+label.error textarea {
+  border-color: var(--Red);
+}
+label.error::after,
+fieldset.error::after {
+  content: attr(data-error);
+  width: 100%;
+  top: 100%;
+  height: fit-content;
+  color: var(--Red);
+  font-size: 12px;
+}
+input[type="text"],
+input[type="submit"] {
+  padding: 0 15px;
+  height: 40px;
+  border-radius: 5px;
+  outline: 0;
+  border: 1px solid;
+  cursor: pointer;
+}
+input[type="submit"] {
+  background-color: var(--Green);
+  color: var(--White);
+  font-size: var(--labelFontSize);
+  border: 0;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+input[type="submit"]:hover {
+  background-color: var(--MediumGrey);
+}
+fieldset {
+  border: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+}
+fieldset div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+textarea {
+  resize: none;
+  width: 100%;
+  height: 80px;
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+input[type="text"]:hover,
+textarea:hover,
+input[type="text"]:focus,
+textarea:focus {
+  border-color: hsl(169, 82%, 27%) !important;
+}
+label:has(input[type="radio"]:checked){
+  background: var(--LightGreen);
+}
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--Green);
+}
+/* Success Div */
+.success.hidden{
+    display: none;
+}
+.success{
+    position: fixed;
+    background-color: var(--DarkGrey);
+    height: fit-content;
+    width: fit-content;
+    top: 20px;
+    border-radius: 10px;
+    display: flex;
+    gap: .5rem;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem;
+    color: var(--White);
+    animation: showUp linear .5s ;
+}
+.successTitle{
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    font-family: var(--karlaBold);
+}
+.success span {
+    font-size: 13px;
+    font-family: var(--karlaRegular);
+
+}
+@media (min-width: 600px) {
+  .forminput,
+  fieldset div {
+    flex-direction: row;
+  }
+  .container,
+  form {
+    width: 80%;
+  }
+}
+@media (max-width: 599px) {
+  input[type="text"],
+  input[type="submit"],
+  label.test {
+    height: 35px;
+  }
+  textarea {
+    height: 80px;
+  }
+  .container,
+  form {
+    width: 100%;
+  }
+}
+@keyframes showUp {
+    0% {
+        transform: translateY(-20%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+    
+}

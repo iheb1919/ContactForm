@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scaleh2.0"> <!-- displays site properly based on user's device -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Contact form</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form  id="contactForm">
+        <h2> Contact Us</h2>
+        <div class="forminput">
+          <label for="firstname"  > 
+            <span>  First name <span>*</span></span>
+            <input type="text" id="firstname" >
+          </label>
+          <label for="lastname"><span> Last name <span>*</span></span>
+            <input type="text" id="lastname" >
+          </label>
+         
+        </div>
+         <div class="forminput">
+          <label for="email" > <span> email <span>*</span></span>
+            <input type="text" id="email" >
+          </label>
+        </div> 
+        <div class="forminput">
+          <fieldset >
+            <legend>
+              Query Type <span>*</span>
+            </legend>
+           <div style="width: 100%" >
+            <label for="GeneralEnquiry"  class="test">
+              <input type="radio" id="GeneralEnquiry" name="queryType" value="GeneralEnquiry">
+             General Enquiry
+            </label>
+            <label for="SupportRequest" class="test">
+              <input type="radio" id="SupportRequest" name="queryType" value="SupportRequest">
+              Support Request
+            </label>
+           </div>
+          </fieldset>
+        </div>
+        <div class="forminput">
+          <label for="textArea">
+            
+            <span>Message <span>*</span></span>
+            <textarea  id="textArea"></textarea>
+          </label>
+        </div>
+        <div class="forminput">
+          <label> 
+            <div>
+
+              <input type="checkbox" id="checkbox" >   I consent to being contacted by the team
+            </div>
+          </label>
+        </div>
+        <div class="forminput">
+          <label> 
+            <input type="Submit" id="submit" > 
+          </label>
+        </div>
+       
+    </form>
+    <div class="success hidden">
+        <div class="successTitle "> <img src = "./assets/images/icon-success-check.svg" alt="My Happy SVG"/>
+          <h3>Message Sent !</h3></div>
+          <span>Thanks for completing the form. we'll be in touch soon</span>
+    </div>
+     <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+      Coded by <a href="#">Iheb Mejri</a>.
+    </div> 
+  </div>
+  
+  <script>
+  document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const form = document.getElementById('contactForm');
+    const inputs = form.querySelectorAll('input[type="text"], input[type="email"], textarea');
+    const radios = form.querySelectorAll('input[name="queryType"]');
+    const checkbox = document.getElementById('checkbox');
+   
+    let hasError = false;
+
+    // Reset all error messages
+    form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+    form.querySelectorAll('[data-error]').forEach(el => el.removeAttribute('data-error'));
+
+    // Validate text, email, and textarea fields
+    inputs.forEach(input => {
+        if (input.value.trim() === "") {
+            setError(input, 'This field is required');
+            hasError = true;
+        } else if (input.id === 'email' && !isValidEmail(input.value.trim())) {
+            setError(input, 'Please enter a valid email address');
+            hasError = true;
+        }
+    });
+
+    // Validate radio buttons
+    const selectedRadio = Array.from(radios).some(radio => radio.checked);
+    if (!selectedRadio) {
+        setError(radios[0].closest('fieldset'), 'This field is required');
+        hasError = true;
+    }
+
+    // Validate checkbox
+    console.log(checkbox)
+    if (!checkbox.checked) {
+        setError(checkbox.closest('label'), 'This field is required');
+        hasError = true;
+    }
+
+    // Submit if no errors
+    if (!hasError) {
+        form.reset();
+        showSuccessMessage();
+    }
+});
+
+function setError(element, message) {
+    const parent = element.closest('label') || element.closest('fieldset');
+    parent.classList.add('error');
+    parent.setAttribute('data-error', message);
+}
+
+function isValidEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+}
+
+function showSuccessMessage() {
+    const success = document.querySelector('.success');
+    success.classList.remove('hidden');
+    //remove message after 5 seconds
+    setTimeout(() => success.classList.add('hidden'), 5000);
+}
+  </script>
+  
+</body>
+</html>
